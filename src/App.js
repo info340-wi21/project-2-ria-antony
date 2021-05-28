@@ -5,9 +5,14 @@ import {AboutPage, Landing} from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
 import {Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 
+import games from './data/gameData.json';
 
 
-function App() {
+function App(props) {
+
+  const gameData = games;
+  // console.log(gameData);
+
   return (
     <div className="the-body">
 
@@ -19,10 +24,18 @@ function App() {
       {/* index page searchBox*/}
       <main>
       <Switch>
-        <Route exact path="/"> <Search /> </Route>
+        <Route exact path="/"> <Search /> 
+        <div className="container">
+        <div className="row">
+          <RenderCard gameData={gameData[0]}/>
+        </div>
+      </div>
+      </Route>
         <Route path="/about"> <AboutPage /> </Route>
         <Redirect to="/" />
       </Switch>
+
+            
       </main>
 
       {/* index page footer*/}
@@ -44,8 +57,8 @@ function NavBar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <a className="nav-item nav-link text-light"><NavLink exact to="/">Home</NavLink></a>
-          <a className="nav-item nav-link text-light"><NavLink to="/about">About</NavLink></a>
+          <NavLink className="nav-item nav-link text-light" exact to="/">Home</NavLink>
+          <NavLink className="nav-item nav-link text-light" to="/about">About</NavLink>
         </div>
       </div>
     </nav>
@@ -63,4 +76,94 @@ function Search(){
   </div>
   );
 }
+
+function RenderCardList(props) {
+  // let botwArray = ["breath", "of", "the", "wild"];
+  // let ootArray = ["ocarina", "of", "time"];
+  // let mmArray = ["majora's", "mask"];
+  // let laArray = ["link's", "awakening"];
+  // let tpArray = ["twilight", "princess"];//Zelda
+  // let forArray = ["forza", "horizon", "4"];
+  // let crewArray = ["the", "crew", "2"];
+  // let nfsArray = ["need", "for", "speed", "heat"];
+  // let dirtArray = ["dirt", "5"];
+  // let fArray = ["f1", "2020"];//racing
+  // let warArray = ["call", "of", "duty:", "warzone"];
+  // let bfArray = ["battlefield", "5"];
+  // let destArray = ["destiny", "2"];
+  // let valArray = ["valorant"];
+  // let csgoArray = ["counter-", "strike", "global", "offensive"];//shooter
+
+  let genreArray = []
+
+  function findCommonElements(array1, array2) {
+    return array1.some(item => array2.includes(item))
+  }
+
+  // console.log(props.gameData)
+
+  let gameList = props.gameData.map((gameObj) => {
+    console.log(gameObj)
+    return <RenderCard key={gameObj.Game} gameData={gameObj} />
+  });
+
+  return (
+    <div className="container">
+      <div className="row">
+            {gameList}
+      </div>
+    </div>
+  );
+}
+
+function RenderCard(props) {
+ 
+//  div1.addEventListener("click", function(){
+//   if (clicked == false){
+//     div6.innerHTML = "";
+    
+//     let genreElem = document.createElement("p") 
+//     genreElem.textContent = "Genre:" + " " + game.Genre;
+//     div6.appendChild(genreElem);
+
+//     let releaseElem = document.createElement("p") 
+//     releaseElem.textContent = "Release Date: " + " " + game.Release_Date; 
+//     div6.appendChild(releaseElem);
+
+//     let communityLinkElem = document.createElement("a");
+//     communityLinkElem.textContent = "Reddit Community"
+//     communityLinkElem.href = game.Subreddit;
+//     div6.appendChild(communityLinkElem);
+//     clicked = true;
+//   }
+//   else{
+//     div6.innerHTML = "";
+//     div6.appendChild(header2Elem);
+//     clicked = false;
+//   }
+//  });
+  // let gameArray = props.
+
+  console.log(props.gameData.Game)
+      return (
+        <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
+          <div className="card mb-4">
+            <div className="card-body">
+              <div className="row">
+                <div className="col col-sm col-xl-12">
+                  <img className="pb-3" src={props.gameData.Picture} alt={props.gameData.Game} />
+                <div className="cols-sm">
+                  <h2 className="card-title">{props.gameData.Game}</h2>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+  
+      // event listener for second data view
+  
+     
+  }
 export default App;

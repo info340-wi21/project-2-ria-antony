@@ -47,10 +47,14 @@ img{
     width: 200px;
 }
 
-body{
+.the-body{
     background-color: #18181a;
     color:white;
     height: 100%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
 }
 
 .landing-body{

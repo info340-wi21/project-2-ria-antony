@@ -9,7 +9,7 @@ import {Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 
 function App() {
   return (
-    <body>
+    <div className="the-body">
 
       {/*header for index page */}
       <header>
@@ -29,7 +29,7 @@ function App() {
       <footer className="footer">
         <p>2021 &#169;</p>
       </footer>
-    </body>
+    </div>
   );
 }
 

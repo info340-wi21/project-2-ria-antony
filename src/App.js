@@ -1,7 +1,9 @@
 
 import React from 'react'; //react library 
 import './App.css';
+import {AboutPage, Landing} from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
+import {Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 
 
 
@@ -16,20 +18,12 @@ function App() {
 
       {/* index page searchBox*/}
       <main>
-        <div className="searchBox" role="search">
-          <input type="text" id="searchQuery" placeholder="Search..." />
-          <button id="searchButton"><i className="fas fa-search fa-flip-horizontal" aria-label="search"></i></button>
-        </div>
-        <div className="container">
-          <div className="row outerMostRow">
-          </div>
-        </div>
+      <Switch>
+        <Route exact path="/"> <Search /> </Route>
+        <Route path="/about"> <AboutPage /> </Route>
+        <Redirect to="/" />
+      </Switch>
       </main>
-
-
-
-
-
 
       {/* index page footer*/}
       <footer className="footer">
@@ -44,19 +38,29 @@ function NavBar() {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark navbar-custom">
-      <a className="navbar-brand" id="nav-elem" href="#">GameFinder</a>
+      <a className="navbar-brand" id="nav-elem" href="/">GameFinder</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <a className="nav-item nav-link text-light" href="#">Home</a> {/*to fix!*/}
-          <a className="nav-item nav-link text-light" href="">Landing</a>{/*to fix!*/}
-          <a className="nav-item nav-link text-light" href="">About</a> {/*to fix!*/}
+          <a className="nav-item nav-link text-light"><NavLink exact to="/">Home</NavLink></a>
+          <a className="nav-item nav-link text-light"><NavLink to="/about">About</NavLink></a>
         </div>
       </div>
     </nav>
 
   )
+}
+
+function Search(){
+  return (
+    <div>
+      <div className="searchBox" role="search">
+          <input type="text" id="searchQuery" placeholder="Search..." />
+          <button id="searchButton"><i className="fas fa-search fa-flip-horizontal" aria-label="search"></i>Search</button>
+      </div>
+  </div>
+  );
 }
 export default App;

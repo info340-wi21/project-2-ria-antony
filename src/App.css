@@ -24,20 +24,23 @@ main{
 }
 .navbar-custom {
     background-color: #000000;
+    color: white;
 }
 .searchBox {
     text-align:center;
     width: 100%;
-    padding-bottom: 1rem;
-    padding-top: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 .searchBox input {
     width: 400px;
     height: 40px;
 }
-button {
+#searchButton {
     height: 40px;
-    width: 40px;
+    width: 70px;
+    background-color: rgb(240, 83, 83);
+    color: white;
 }
 img{
     height: 150px;
@@ -46,11 +49,12 @@ img{
 
 body{
     background-color: #18181a;
-    color: white;
+    color:white;
+    height: 100%;
 }
 
 .landing-body{
-    background: black;
+    background-color: black;
     color: white;
 }
 

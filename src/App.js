@@ -1,7 +1,7 @@
 
 import React from 'react'; //react library 
 import './App.css';
-import {AboutPage, Landing} from './About';
+import {AboutPage} from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
 import {Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
 
@@ -147,14 +147,14 @@ function RenderCard(props) {
   console.log(props.gameData.Game)
       return (
         <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
-          <div className="card mb-4">
+          <div className="card mb-4 bg-secondary">
             <div className="card-body">
               <div className="row">
                 <div className="col col-sm col-xl-12">
                   <img className="pb-3" src={props.gameData.Picture} alt={props.gameData.Game} />
+                </div>
                 <div className="cols-sm">
                   <h2 className="card-title">{props.gameData.Game}</h2>
-                </div>
                 </div>
               </div>
             </div>

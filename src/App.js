@@ -3,7 +3,9 @@ import React from 'react'; //react library
 import './App.css';
 import {AboutPage} from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
+import { Button } from 'reactstrap';
 import {Route, Switch, Link, Redirect, NavLink} from 'react-router-dom';
+
 
 import games from './data/gameData.json';
 
@@ -35,6 +37,7 @@ function App(props) {
         <Redirect to="/" />
       </Switch>
 
+
             
       </main>
 
@@ -57,6 +60,7 @@ function NavBar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
+        
           <NavLink className="nav-item nav-link text-light" exact to="/">Home</NavLink>
           <NavLink className="nav-item nav-link text-light" to="/about">About</NavLink>
         </div>
@@ -71,7 +75,7 @@ function Search(){
     <div>
       <div className="searchBox" role="search">
           <input type="text" id="searchQuery" placeholder="Search..." />
-          <button id="searchButton"><i className="fas fa-search fa-flip-horizontal" aria-label="search"></i>Search</button>
+          <Button id="searchButton"><i className="fas fa-search fa-flip-horizontal" aria-label="search"></i>Search</Button>
       </div>
   </div>
   );

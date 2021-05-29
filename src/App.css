@@ -4,6 +4,7 @@
     font-family: monospace;
     
 }
+
 .card{
     box-shadow: 4px 4px black;
     border: none;
@@ -39,7 +40,7 @@ main{
 #searchButton {
     height: 40px;
     width: 70px;
-    background-color: rgb(240, 83, 83);
+    background-color: #16ccba;
     color: white;
 }
 img{
@@ -109,9 +110,16 @@ img{
     margin-right: 2rem;
 }
 #aboutHeader{
+    justify-content: center;
+    text-align: center;
     margin-top: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
+}
+#aboutButton{
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 @media (min-width: 768px){

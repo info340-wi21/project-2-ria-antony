@@ -77,7 +77,7 @@ function Search(props) {
       <div className="searchBox" role="search">
         <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder="Search..." />
       </div>
-      <button className="info-button" onClick={handleClick}>View More Information</button>
+      <Button className="info-button" onClick={handleClick}>View More Information</Button>
     </div>
   );
 }
@@ -128,7 +128,7 @@ function RenderCardList(props) {
 
     //filters out the searched game from the rendered cards
     let searchList = props.gameData.filter(function(item) {
-      if(item.Genre == "Zelda") {
+      if(item.Genre === "Zelda") {
         if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
           return item;
         }
@@ -143,7 +143,7 @@ function RenderCardList(props) {
 
     //filters out the searched game from the rendered cards
     let searchList = props.gameData.filter(function(item) {
-      if(item.Genre == "Racing") {
+      if(item.Genre === "Racing") {
         if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
           return item;
         }
@@ -158,7 +158,7 @@ function RenderCardList(props) {
   else if(runGame(shooter)) {
     //filters out the searched game from the rendered cards
     let searchList = props.gameData.filter(function(item) {
-      if(item.Genre == "Shooter") {
+      if(item.Genre === "Shooter") {
         if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
           return item;
         }
@@ -197,7 +197,7 @@ function RenderCard(props) {
   let genreText = "";
   let redditLink = "";
   let discordLink = "";
-  if(props.cardClicked == true){
+  if(props.cardClicked === true){
     dateText = "Release Date: " +  props.gameData.Release_Date
     genreText = "Genre: " + props.gameData.Genre;
     redditLink = "Reddit";

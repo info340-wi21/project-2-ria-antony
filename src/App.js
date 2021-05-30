@@ -4,7 +4,7 @@ import './App.css';
 import { AboutPage } from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
 import { Button } from 'reactstrap';
-import { Route, Switch, Link, Redirect, NavLink } from 'react-router-dom';
+import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
 
 
 import games from './data/gameData.json';
@@ -13,19 +13,16 @@ import games from './data/gameData.json';
 function App(props) {
 
   const gameData = games;
-  // console.log(gameData);
   const [keyword, setKeyword] = useState("");
   const [cardClicked, setCardClicked] = useState(false);
   const [favorites, setFavorites] = useState([]);
 
   return (
     <div className="the-body">
-
       {/*header for index page */}
       <header>
         <NavBar />
       </header>
-
       {/* index page searchBox*/}
       <main>
         <Switch>
@@ -33,14 +30,10 @@ function App(props) {
                 <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} favorites={favorites} setFavorites={setFavorites} />
           </Route>
           <Route path="/about"> <AboutPage /> </Route>
-          <Route path="/favorite"><FavPage favList={favorites}/></Route>
+          <Route path="/favorite"><FavPage favList={favorites} setFavorites={setFavorites}/></Route>
           <Redirect to="/" />
         </Switch>
-
-
-
       </main>
-
       {/* index page footer*/}
       <footer className="footer">
         <p>2021 &#169;</p>
@@ -80,7 +73,7 @@ function Search(props) {
       <div className="searchBox" role="search">
         <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder="Search..." />
       </div>
-      <Button className="info-button" onClick={handleClick}>View More Information</Button>
+      <Button className="info-button" onClick={handleClick}>Change View</Button>
     </div>
   );
 }
@@ -119,7 +112,6 @@ function RenderCardList(props) {
     function runGame(array1) {
       for(let game of array1) {
         if(findCommonElements(searchTokens, game)) {
-          //console.log(game)
           return true;
         }
       }
@@ -174,15 +166,8 @@ function RenderCardList(props) {
 
   }
   else {
-    //renderError(new Error("No results found"));
+    //renderError
   }
-  
-  // function renderError(errorObj){
-  //   let errorAlert = document.createElement('p');
-  //   errorAlert.textContent = errorObj.message;
-  //   errorAlert.setAttribute("class", "alert alert-danger");
-  //   cardDiv.appendChild(errorAlert);
-  // }
 
  
   return (
@@ -222,35 +207,6 @@ function RenderCard(props) {
     isfav = "Favorited";
   }
  
-
-  //  div1.addEventListener("click", function(){
-  //   if (clicked == false){
-  //     div6.innerHTML = "";
-
-  //     let genreElem = document.createElement("p") 
-  //     genreElem.textContent = "Genre:" + " " + game.Genre;
-  //     div6.appendChild(genreElem);
-
-  //     let releaseElem = document.createElement("p") 
-  //     releaseElem.textContent = "Release Date: " + " " + game.Release_Date; 
-  //     div6.appendChild(releaseElem);
-
-  //     let communityLinkElem = document.createElement("a");
-  //     communityLinkElem.textContent = "Reddit Community"
-  //     communityLinkElem.href = game.Subreddit;
-  //     div6.appendChild(communityLinkElem);
-  //     clicked = true;
-  //   }
-  //   else{
-  //     div6.innerHTML = "";
-  //     div6.appendChild(header2Elem);
-  //     clicked = false;
-  //   }
-  //  });
-
-  // let gameArray = props.
-
-  //console.log(props.gameData.Game)
   return (
       <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
         <div className="card mb-4 bg-secondary">
@@ -261,18 +217,11 @@ function RenderCard(props) {
               </div>
               <div className="cols-sm">
                 <h2 className="card-title">{props.gameData.Game}</h2>
-                {/*<ul className="list-group list-group-flush">
-                  <li className="list-group-item bg-secondary text-white">Release Date: {props.gameData.Release_Date}</li>
-                  <li className="list-group-item bg-secondary text-white">Genre: {props.gameData.Genre}</li>
-                  <li className="list-group-item bg-secondary text-white"><a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Subreddit}>Reddit</a></li>
-                  <li className="list-group-item bg-secondary text-white"><a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Discord}>Discord</a></li>
-                </ul>
-              */}
                 <p>{dateText}</p>
                 <p>{genreText}</p>
                 <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Subreddit}>{redditLink}</a><br></br><br></br>
-                <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Discord}>{discordLink}</a><br></br>
-                <button onClick={handleClick} className="fav-button">{isfav}</button>
+                <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Discord}>{discordLink}</a><br></br><br></br>
+                <button onClick={handleClick} className="fav-button bg-info text-white">{isfav}</button>
               </div>
             </div>
           </div>
@@ -284,7 +233,7 @@ function FavPage(props) {
   return (
       <div>
           <h1 id="aboutHeader">Favorites</h1>
-              <FavList favArr={props.favList}></FavList>
+              <FavList favArr={props.favList} setFavorites={props.setFavorites}></FavList>
       </div>
   );
 }
@@ -292,7 +241,7 @@ function FavPage(props) {
 function FavList(props){
   let favList = props.favArr.map((gameObj) => {
   
-      return <RenderFavCard key={gameObj.Game} gameData={gameObj} favorites={props.favorites} setFavorites={props.setFavorites} />
+      return <RenderFavCard key={gameObj.Game} gameData={gameObj} favorites={props.favArr} setFavorites={props.setFavorites} />
     });
   return(
       <div className="container">
@@ -304,6 +253,16 @@ function FavList(props){
 }
 
 function RenderFavCard(props){
+  let gameIndex = undefined;
+  let newFavList = [];
+  let rem = "Remove";
+  const handleClick = (event) => {
+    gameIndex = props.favorites.indexOf(props.gameData);
+    newFavList = props.favorites;
+    newFavList.splice(gameIndex, 1);
+    props.setFavorites(newFavList);
+  }
+
   return (
       <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
         <div className="card mb-4 bg-secondary">
@@ -314,10 +273,11 @@ function RenderFavCard(props){
               </div>
               <div className="cols-sm">
                 <h2 className="card-title">{props.gameData.Game}</h2>
-                <p>{props.gameData.Release_Date}</p>
-                <p>{props.gameData.Genre}</p>
+                <p> Release Date: {props.gameData.Release_Date}</p>
+                <p>Genre: {props.gameData.Genre}</p>
                 <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Subreddit}>Reddit</a><br></br><br></br>
-                <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Discord}>Discord</a><br></br>
+                <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Discord}>Discord</a><br></br><br></br>
+                <button onClick={handleClick} className="re-button bg-danger text-white">{rem}</button>
               </div>
             </div>
           </div>

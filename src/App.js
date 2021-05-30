@@ -1,5 +1,5 @@
 
-import React from 'react'; //react library 
+import React, {useState} from 'react'; //react library 
 import './App.css';
 import { AboutPage } from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
@@ -14,6 +14,8 @@ function App(props) {
 
   const gameData = games;
   // console.log(gameData);
+  const [keyword, setKeyword] = useState("");
+  const [cardClicked, setCardClicked] = useState(false);
 
   return (
     <div className="the-body">
@@ -26,10 +28,8 @@ function App(props) {
       {/* index page searchBox*/}
       <main>
         <Switch>
-          <Route exact path="/"> <Search />
-                <RenderCardList gameData={gameData} searchTerm={"need"} />
-              
-            
+          <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} />
+                <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} />
           </Route>
           <Route path="/about"> <AboutPage /> </Route>
           <Redirect to="/" />
@@ -68,36 +68,16 @@ function NavBar() {
   )
 }
 
-function Search() {
+function Search(props) {
   return (
     <div>
       <div className="searchBox" role="search">
-        <input type="text" id="searchQuery" placeholder="Search..." />
-        <Button id="searchButton"><i className="fas fa-search fa-flip-horizontal" aria-label="search"></i>Search</Button>
+        <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder="Search..." />
       </div>
     </div>
   );
 }
 
-function fetchResults(searchTerm){
-  let url = "../data/gameData.json";
-  let outerPromise = fetch(url)
-    .then(function(response) {
-        let promise = response.json();
-        return promise;
-    })
-    .then(function(data) {
-      console.log(data);
-      return data;
-    })
-    // .catch(function(err) {
-    //   renderError(err);
-    //   return err;
-    // })
-    .then(function(){
-    });
-  return outerPromise;
-}
 
 function RenderCardList(props) {
 
@@ -152,7 +132,7 @@ function RenderCardList(props) {
     })
     gameList = searchList.map((gameObj) => {
     
-      return <RenderCard key={gameObj.Game} gameData={gameObj} />
+      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} />
     });
   }
   else if(runGame(racing)) {
@@ -198,7 +178,6 @@ function RenderCardList(props) {
   // }
 
  
-
   return (
     <div className="container">
       <div className="row">
@@ -209,6 +188,26 @@ function RenderCardList(props) {
 }
 
 function RenderCard(props) {
+  const handleClick = (event) => {
+    props.setCardClicked(!props.cardClicked);
+  }
+
+  let dateText = "";
+  let genreText = "";
+  let redditLink = "";
+  let discordLink = "";
+  if(props.cardClicked == true){
+    dateText = "Release Date: " +  props.gameData.Release_Date
+    genreText = "Genre: " + props.gameData.Genre;
+    redditLink = "Reddit";
+    discordLink = "Discord";
+  }
+  else{
+    dateText = "";
+    genreText = "";
+    redditLink = "";
+    discordLink = "";
+  }
 
   //  div1.addEventListener("click", function(){
   //   if (clicked == false){
@@ -239,25 +238,31 @@ function RenderCard(props) {
 
   console.log(props.gameData.Game)
   return (
-    <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
-      <div className="card mb-4 bg-secondary">
-        <div className="card-body">
-          <div className="row">
-            <div className="col col-sm col-xl-12">
-              <img className="card-img-top" src={props.gameData.Picture} alt={props.gameData.Game} />
-            </div>
-            <div className="cols-sm">
-              <h2 className="card-title">{props.gameData.Game}</h2>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">{props.gameData.Release_Date}</li>
-                <li className="list-group-item">{props.gameData.Subreddit}</li>
-                <li className="list-group-item">{props.gameData.Discord}</li>
-              </ul>
+      <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
+        <div onClick={handleClick} className="card mb-4 bg-secondary">
+          <div className="card-body">
+            <div className="row">
+              <div className="col col-sm col-xl-12">
+                <img className="card-img-top" src={props.gameData.Picture} alt={props.gameData.Game} />
+              </div>
+              <div className="cols-sm">
+                <h2 className="card-title">{props.gameData.Game}</h2>
+                {/*<ul className="list-group list-group-flush">
+                  <li className="list-group-item bg-secondary text-white">Release Date: {props.gameData.Release_Date}</li>
+                  <li className="list-group-item bg-secondary text-white">Genre: {props.gameData.Genre}</li>
+                  <li className="list-group-item bg-secondary text-white"><a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Subreddit}>Reddit</a></li>
+                  <li className="list-group-item bg-secondary text-white"><a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Discord}>Discord</a></li>
+                </ul>
+              */}
+                <p>{dateText}</p>
+                <p>{genreText}</p>
+                <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Subreddit}>{redditLink}</a><br></br><br></br>
+                <a className="text-white" target="_blank" rel="noopener noreferrer" href={props.gameData.Discord}>{discordLink}</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   );
 
   // event listener for second data view

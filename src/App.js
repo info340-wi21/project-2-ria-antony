@@ -27,11 +27,9 @@ function App(props) {
       <main>
         <Switch>
           <Route exact path="/"> <Search />
-            <div className="container">
-              <div className="row">
-                <RenderCard gameData={gameData[0]} />
-              </div>
-            </div>
+                <RenderCardList gameData={gameData} searchTerm={"need"} />
+              
+            
           </Route>
           <Route path="/about"> <AboutPage /> </Route>
           <Redirect to="/" />
@@ -81,35 +79,125 @@ function Search() {
   );
 }
 
+function fetchResults(searchTerm){
+  let url = "../data/gameData.json";
+  let outerPromise = fetch(url)
+    .then(function(response) {
+        let promise = response.json();
+        return promise;
+    })
+    .then(function(data) {
+      console.log(data);
+      return data;
+    })
+    // .catch(function(err) {
+    //   renderError(err);
+    //   return err;
+    // })
+    .then(function(){
+    });
+  return outerPromise;
+}
+
 function RenderCardList(props) {
-  // let botwArray = ["breath", "of", "the", "wild"];
-  // let ootArray = ["ocarina", "of", "time"];
-  // let mmArray = ["majora's", "mask"];
-  // let laArray = ["link's", "awakening"];
-  // let tpArray = ["twilight", "princess"];//Zelda
-  // let forArray = ["forza", "horizon", "4"];
-  // let crewArray = ["the", "crew", "2"];
-  // let nfsArray = ["need", "for", "speed", "heat"];
-  // let dirtArray = ["dirt", "5"];
-  // let fArray = ["f1", "2020"];//racing
-  // let warArray = ["call", "of", "duty:", "warzone"];
-  // let bfArray = ["battlefield", "5"];
-  // let destArray = ["destiny", "2"];
-  // let valArray = ["valorant"];
-  // let csgoArray = ["counter-", "strike", "global", "offensive"];//shooter
 
-  let genreArray = []
+  let searchTokens = props.searchTerm.toLowerCase().split(" ");
+  
+  let botwArray = ["breath", "of", "the", "wild"];
+  let ootArray = ["ocarina", "of", "time"];
+  let mmArray = ["majora's", "mask"];
+  let laArray = ["link's", "awakening"];
+  let tpArray = ["twilight", "princess"];//Zelda
+  let forArray = ["forza", "horizon", "4"];
+  let crewArray = ["the", "crew", "2"];
+  let nfsArray = ["need", "for", "speed", "heat"];
+  let dirtArray = ["dirt", "5"];
+  let fArray = ["f1", "2020"];//racing
+  let warArray = ["call", "of", "duty:", "warzone"];
+  let bfArray = ["battlefield", "5"];
+  let destArray = ["destiny", "2"];
+  let valArray = ["valorant"];
+  let csgoArray = ["counter-", "strike", "global", "offensive"];//shooter
 
+  let zelda = [botwArray, ootArray, mmArray, laArray, tpArray];
+  let racing = [forArray, crewArray, nfsArray, dirtArray, fArray];
+  let shooter = [warArray, bfArray, destArray, valArray, csgoArray];
+
+  //finds common elements between two arrays
   function findCommonElements(array1, array2) {
     return array1.some(item => array2.includes(item))
   }
 
-  // console.log(props.gameData)
+    //determines if searchTerm is found in an array
+    function runGame(array1) {
+      for(let game of array1) {
+        if(findCommonElements(searchTokens, game)) {
+          console.log(game)
+          return true;
+        }
+      }
+    }
 
-  let gameList = props.gameData.map((gameObj) => {
-    console.log(gameObj)
-    return <RenderCard key={gameObj.Game} gameData={gameObj} />
-  });
+  let gameList= [];
+  //runs through the 3 genres and renders the cards
+  if(runGame(zelda)) {
+
+    //filters out the searched game from the rendered cards
+    let searchList = props.gameData.filter(function(item) {
+      if(item.Genre == "Zelda") {
+        if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+          return item;
+        }
+      }
+    })
+    gameList = searchList.map((gameObj) => {
+    
+      return <RenderCard key={gameObj.Game} gameData={gameObj} />
+    });
+  }
+  else if(runGame(racing)) {
+
+    //filters out the searched game from the rendered cards
+    let searchList = props.gameData.filter(function(item) {
+      if(item.Genre == "Racing") {
+        if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+          return item;
+        }
+      }
+    })
+    gameList = searchList.map((gameObj) => {
+    
+      return <RenderCard key={gameObj.Game} gameData={gameObj} />
+    });
+
+  }
+  else if(runGame(shooter)) {
+    //filters out the searched game from the rendered cards
+    let searchList = props.gameData.filter(function(item) {
+      if(item.Genre == "Shooter") {
+        if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+          return item;
+        }
+      }
+    })
+    gameList = searchList.map((gameObj) => {
+    
+      return <RenderCard key={gameObj.Game} gameData={gameObj} />
+    });
+
+  }
+  else {
+    //renderError(new Error("No results found"));
+  }
+  
+  // function renderError(errorObj){
+  //   let errorAlert = document.createElement('p');
+  //   errorAlert.textContent = errorObj.message;
+  //   errorAlert.setAttribute("class", "alert alert-danger");
+  //   cardDiv.appendChild(errorAlert);
+  // }
+
+ 
 
   return (
     <div className="container">
@@ -146,6 +234,7 @@ function RenderCard(props) {
   //     clicked = false;
   //   }
   //  });
+
   // let gameArray = props.
 
   console.log(props.gameData.Game)
@@ -159,10 +248,10 @@ function RenderCard(props) {
             </div>
             <div className="cols-sm">
               <h2 className="card-title">{props.gameData.Game}</h2>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">{props.gameData.Release_Date}</li>
-                <li class="list-group-item">{props.gameData.Subreddit}</li>
-                <li class="list-group-item">{props.gameData.Discord}</li>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">{props.gameData.Release_Date}</li>
+                <li className="list-group-item">{props.gameData.Subreddit}</li>
+                <li className="list-group-item">{props.gameData.Discord}</li>
               </ul>
             </div>
           </div>

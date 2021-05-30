@@ -28,7 +28,7 @@ function App(props) {
       {/* index page searchBox*/}
       <main>
         <Switch>
-          <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} />
+          <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} cardClicked={cardClicked} setCardClicked={setCardClicked} />
                 <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} />
           </Route>
           <Route path="/about"> <AboutPage /> </Route>
@@ -69,11 +69,15 @@ function NavBar() {
 }
 
 function Search(props) {
+  const handleClick = (event) => {
+    props.setCardClicked(!props.cardClicked);
+  }
   return (
-    <div>
+    <div className="search-view">
       <div className="searchBox" role="search">
         <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder="Search..." />
       </div>
+      <button className="info-button" onClick={handleClick}>View More Information</button>
     </div>
   );
 }
@@ -147,7 +151,7 @@ function RenderCardList(props) {
     })
     gameList = searchList.map((gameObj) => {
     
-      return <RenderCard key={gameObj.Game} gameData={gameObj} />
+      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked}/>
     });
 
   }
@@ -162,7 +166,7 @@ function RenderCardList(props) {
     })
     gameList = searchList.map((gameObj) => {
     
-      return <RenderCard key={gameObj.Game} gameData={gameObj} />
+      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} />
     });
 
   }
@@ -188,9 +192,6 @@ function RenderCardList(props) {
 }
 
 function RenderCard(props) {
-  const handleClick = (event) => {
-    props.setCardClicked(!props.cardClicked);
-  }
 
   let dateText = "";
   let genreText = "";
@@ -239,7 +240,7 @@ function RenderCard(props) {
   console.log(props.gameData.Game)
   return (
       <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
-        <div onClick={handleClick} className="card mb-4 bg-secondary">
+        <div className="card mb-4 bg-secondary">
           <div className="card-body">
             <div className="row">
               <div className="col col-sm col-xl-12">

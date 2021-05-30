@@ -14,6 +14,17 @@
 .card:hover {
     box-shadow: 8px 8px black;
 }
+.info-button{
+    background-color:#16ccba;
+    color: white;
+    border-radius: 10px 10px 10px 10px;
+    height: 50px;
+    width: 200px;
+}
+.search-view{
+    text-align: center;
+    padding-bottom: 1rem;
+}
 
 .card-title{
     font-family:Georgia, 'Times New Roman', Times, serif;

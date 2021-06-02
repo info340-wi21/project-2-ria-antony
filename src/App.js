@@ -9,7 +9,7 @@ import firebase from 'firebase';
 
 import games from './data/gameData.json';
 
-let allFavsArray = [];
+let allFavsArray = []; //empty array that will hold the array version of firebase data
 
 function App(props) {
 
@@ -17,12 +17,10 @@ function App(props) {
   const [keyword, setKeyword] = useState("");
   const [cardClicked, setCardClicked] = useState(false);
   const [favorites, setFavorites] = useState([]);
-  const rootRef = firebase.database().ref();
-  //console.log(rootRef);
+  const rootRef = firebase.database().ref(); //reference to firebase database
 
 
   return (
-    //<FirebaseDatabaseProvider>
       <div className="the-body">
         {/*header for index page */}
         <header>
@@ -45,7 +43,6 @@ function App(props) {
           <p>2021 &#169;</p>
         </footer>
       </div>
-    //</FirebaseDatabaseProvider>
   );
 }
 
@@ -190,14 +187,11 @@ function RenderCardList(props) {
 function RenderCard(props) {
 
   const handleClick = (event) => {
-    props.setFavorites([...props.favorites, props.gameData]);
-    props.rootRef.push(props.gameData);
-    props.rootRef.on('value', snapshot => {
-      const state = snapshot.val();
-      console.log(state);
+    props.rootRef.ref.orderByChild("Game").equalTo(props.gameData.Game).once('value', snapshot => {
+      if(!snapshot.exists()){
+        props.rootRef.push(props.gameData); 
+      }
     });
-    console.log('DATA RETRIEVED');
-
   }
 
   let dateText = "";
@@ -254,7 +248,7 @@ function FavPage(props) {
 }
 
 function FavList(props){
-   props.rootRef.on('value', snapshot => {
+   props.rootRef.on('value', snapshot => { //Kinda complicated but bascially turns firebase data into array form so it can be mapped
     let favShot = snapshot.val();
     if (favShot !== null){
       const allFavsObject = favShot;
@@ -267,7 +261,7 @@ function FavList(props){
     }
   });
  
-  let favList = allFavsArray.map((gameObj) => {
+  let favList = allFavsArray.map((gameObj) => { //firebase data in array form being mapped
   
       return <RenderFavCard key={gameObj.Game} gameData={gameObj} favorites={props.favArr} setFavorites={props.setFavorites} rootRef={props.rootRef} />
     });
@@ -281,25 +275,17 @@ function FavList(props){
 }
 
 function RenderFavCard(props){
-  let gameIndex = undefined;
-  let newFavList = [];
   let rem = "Remove";
   let key = "";
   const handleClick = (event) => {
-    gameIndex = props.favorites.indexOf(props.gameData);
-    newFavList = props.favorites;
-    newFavList.splice(gameIndex, 1);
-    props.setFavorites(newFavList);
-    for (let i = 0; i < allFavsArray.length; i++) {
+    for (let i = 0; i < allFavsArray.length; i++) { //Looks through firebase "array" to find the key of the gameObject that's "remove" button got pushed
       if (allFavsArray[i] === props.gameData){
         key = allFavsArray[i].key;
       }
     }
     if (key !== ""){
-      props.rootRef.child(key).remove();
+      props.rootRef.child(key).remove(); //Removes gameObject from Firebase data based on key
     }
-    console.log(props.rootRef);
-    FavList(props);
   }
 
   return (

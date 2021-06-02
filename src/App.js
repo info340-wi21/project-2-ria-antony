@@ -9,6 +9,7 @@ import firebase from 'firebase';
 
 import games from './data/gameData.json';
 
+let allFavsArray = [];
 
 function App(props) {
 
@@ -17,12 +18,7 @@ function App(props) {
   const [cardClicked, setCardClicked] = useState(false);
   const [favorites, setFavorites] = useState([]);
   const rootRef = firebase.database().ref();
-  console.log(rootRef);
-  rootRef.on('value', snapshot => {
-    const state = snapshot.val();
-    console.log(state);
-  });
-  console.log('DATA RETRIEVED');
+  //console.log(rootRef);
 
 
   return (
@@ -36,10 +32,11 @@ function App(props) {
         <main>
           <Switch>
             <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} cardClicked={cardClicked} setCardClicked={setCardClicked} />
-                  <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} favorites={favorites} setFavorites={setFavorites} />
+                  <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} favorites={favorites} setFavorites={setFavorites}
+                    rootRef={rootRef} />
             </Route>
             <Route path="/about"> <AboutPage /> </Route>
-            <Route path="/favorite"><FavPage favList={favorites} setFavorites={setFavorites}/></Route>
+            <Route path="/favorite"><FavPage favList={favorites} setFavorites={setFavorites} rootRef={rootRef}/></Route>
             <Redirect to="/" />
           </Switch>
         </main>
@@ -141,7 +138,8 @@ function RenderCardList(props) {
     })
     gameList = searchList.map((gameObj) => {
     
-      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} favorites={props.favorites} setFavorites={props.setFavorites} />
+      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} favorites={props.favorites} setFavorites={props.setFavorites}
+                rootRef={props.rootRef} />
     });
   }
   else if(runGame(racing)) {
@@ -156,7 +154,7 @@ function RenderCardList(props) {
     })
     gameList = searchList.map((gameObj) => {
     
-      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} favorites={props.favorites} setFavorites={props.setFavorites}/>
+      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} favorites={props.favorites} setFavorites={props.setFavorites} rootRef={props.rootRef}/>
     });
 
   }
@@ -171,7 +169,7 @@ function RenderCardList(props) {
     })
     gameList = searchList.map((gameObj) => {
     
-      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} favorites={props.favorites} setFavorites={props.setFavorites} />
+      return <RenderCard key={gameObj.Game} gameData={gameObj} cardClicked={props.cardClicked} setCardClicked={props.setCardClicked} favorites={props.favorites} setFavorites={props.setFavorites} rootRef={props.rootRef} />
     });
 
   }
@@ -193,6 +191,13 @@ function RenderCard(props) {
 
   const handleClick = (event) => {
     props.setFavorites([...props.favorites, props.gameData]);
+    props.rootRef.push(props.gameData);
+    props.rootRef.on('value', snapshot => {
+      const state = snapshot.val();
+      console.log(state);
+    });
+    console.log('DATA RETRIEVED');
+
   }
 
   let dateText = "";
@@ -243,15 +248,28 @@ function FavPage(props) {
   return (
       <div>
           <h1 id="aboutHeader">Favorites</h1>
-              <FavList favArr={props.favList} setFavorites={props.setFavorites}></FavList>
+              <FavList favArr={props.favList} setFavorites={props.setFavorites} rootRef={props.rootRef}></FavList>
       </div>
   );
 }
 
 function FavList(props){
-  let favList = props.favArr.map((gameObj) => {
+   props.rootRef.on('value', snapshot => {
+    let favShot = snapshot.val();
+    if (favShot !== null){
+      const allFavsObject = favShot;
+      const allFavsKeys = Object.keys(allFavsObject);
+        allFavsArray = allFavsKeys.map((key) => { 
+        const singleFavCopy = {...allFavsObject[key]}; 
+        singleFavCopy.key = key;
+        return singleFavCopy;
+      });
+    }
+  });
+ 
+  let favList = allFavsArray.map((gameObj) => {
   
-      return <RenderFavCard key={gameObj.Game} gameData={gameObj} favorites={props.favArr} setFavorites={props.setFavorites} />
+      return <RenderFavCard key={gameObj.Game} gameData={gameObj} favorites={props.favArr} setFavorites={props.setFavorites} rootRef={props.rootRef} />
     });
   return(
       <div className="container">
@@ -266,11 +284,22 @@ function RenderFavCard(props){
   let gameIndex = undefined;
   let newFavList = [];
   let rem = "Remove";
+  let key = "";
   const handleClick = (event) => {
     gameIndex = props.favorites.indexOf(props.gameData);
     newFavList = props.favorites;
     newFavList.splice(gameIndex, 1);
     props.setFavorites(newFavList);
+    for (let i = 0; i < allFavsArray.length; i++) {
+      if (allFavsArray[i] === props.gameData){
+        key = allFavsArray[i].key;
+      }
+    }
+    if (key !== ""){
+      props.rootRef.child(key).remove();
+    }
+    console.log(props.rootRef);
+    FavList(props);
   }
 
   return (

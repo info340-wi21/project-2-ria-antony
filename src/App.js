@@ -1,11 +1,11 @@
-
+//import { FirebaseDatabaseProvider } from "@react-firebase/database";
 import React, {useState} from 'react'; //react library 
 import './App.css';
 import { AboutPage } from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
 import { Button } from 'reactstrap';
 import { Route, Switch, Redirect, NavLink } from 'react-router-dom';
-
+import firebase from 'firebase';
 
 import games from './data/gameData.json';
 
@@ -16,29 +16,39 @@ function App(props) {
   const [keyword, setKeyword] = useState("");
   const [cardClicked, setCardClicked] = useState(false);
   const [favorites, setFavorites] = useState([]);
+  const rootRef = firebase.database().ref();
+  console.log(rootRef);
+  rootRef.on('value', snapshot => {
+    const state = snapshot.val();
+    console.log(state);
+  });
+  console.log('DATA RETRIEVED');
+
 
   return (
-    <div className="the-body">
-      {/*header for index page */}
-      <header>
-        <NavBar />
-      </header>
-      {/* index page searchBox*/}
-      <main>
-        <Switch>
-          <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} cardClicked={cardClicked} setCardClicked={setCardClicked} />
-                <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} favorites={favorites} setFavorites={setFavorites} />
-          </Route>
-          <Route path="/about"> <AboutPage /> </Route>
-          <Route path="/favorite"><FavPage favList={favorites} setFavorites={setFavorites}/></Route>
-          <Redirect to="/" />
-        </Switch>
-      </main>
-      {/* index page footer*/}
-      <footer className="footer">
-        <p>2021 &#169;</p>
-      </footer>
-    </div>
+    //<FirebaseDatabaseProvider>
+      <div className="the-body">
+        {/*header for index page */}
+        <header>
+          <NavBar />
+        </header>
+        {/* index page searchBox*/}
+        <main>
+          <Switch>
+            <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} cardClicked={cardClicked} setCardClicked={setCardClicked} />
+                  <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} favorites={favorites} setFavorites={setFavorites} />
+            </Route>
+            <Route path="/about"> <AboutPage /> </Route>
+            <Route path="/favorite"><FavPage favList={favorites} setFavorites={setFavorites}/></Route>
+            <Redirect to="/" />
+          </Switch>
+        </main>
+        {/* index page footer*/}
+        <footer className="footer">
+          <p>2021 &#169;</p>
+        </footer>
+      </div>
+    //</FirebaseDatabaseProvider>
   );
 }
 

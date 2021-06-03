@@ -210,11 +210,6 @@ function RenderCard(props) {
     redditLink = "";
     discordLink = "";
   }
-  props.rootRef.ref.orderByChild("Game").equalTo(props.gameData.Game).once('value', snapshot => {
-    if(snapshot.exists()){
-      isfav = "Favorited";
-    }
-  });
  
   return (
       <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
@@ -239,6 +234,7 @@ function RenderCard(props) {
   );
 }
 function FavPage(props) {
+  console.log(props.rootRef);
   return (
       <div>
           <h1 id="aboutHeader">Favorites</h1>
@@ -248,7 +244,9 @@ function FavPage(props) {
 }
 
 function FavList(props){
-   props.rootRef.on('value', snapshot => { //Kinda complicated but bascially turns firebase data into array form so it can be mapped
+  let reference = props.rootRef;
+  console.log(reference);
+  reference.on('value', snapshot => { //Kinda complicated but bascially turns firebase data into array form so it can be mapped
     let favShot = snapshot.val();
     if (favShot !== null){
       const allFavsObject = favShot;
@@ -266,7 +264,7 @@ function FavList(props){
  
   let favList = allFavsArray.map((gameObj) => { //firebase data in array form being mapped
   
-      return <RenderFavCard key={gameObj.Game} gameData={gameObj} favorites={props.favArr} setFavorites={props.setFavorites} rootRef={props.rootRef} />
+      return <RenderFavCard key={gameObj.Game} gameData={gameObj} rootRef={reference} />
     });
   return(
       <div className="container">
@@ -277,9 +275,15 @@ function FavList(props){
   );
 }
 
+
+
 function RenderFavCard(props){
   let rem = "Remove";
   let key = "";
+  const [value, setValue] = useState(0); // integer state
+  const ForceUpdate = () =>{
+    return () => setValue(value => this.value + 1); // update the state to force render
+  }
   const handleClick = (event) => {
     for (let i = 0; i < allFavsArray.length; i++) { //Looks through firebase "array" to find the key of the gameObject that's "remove" button got pushed
       if (allFavsArray[i] === props.gameData){
@@ -289,7 +293,11 @@ function RenderFavCard(props){
     if (key !== ""){
       props.rootRef.child(key).remove(); //Removes gameObject from Firebase data based on key
     }
+    console.log(props);
+    return <FavList rootRef={props.rootRef}></FavList>
   }
+
+
 
   return (
       <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">

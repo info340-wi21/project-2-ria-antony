@@ -185,11 +185,10 @@ function RenderCardList(props) {
 }
 
 function RenderCard(props) {
-
   const handleClick = (event) => {
     props.rootRef.ref.orderByChild("Game").equalTo(props.gameData.Game).once('value', snapshot => {
       if(!snapshot.exists()){
-        props.rootRef.push(props.gameData); 
+        props.rootRef.push(props.gameData);
       }
     });
   }
@@ -211,10 +210,11 @@ function RenderCard(props) {
     redditLink = "";
     discordLink = "";
   }
-
-  if (props.favorites.indexOf(props.gameData) !== -1){
-    isfav = "Favorited";
-  }
+  props.rootRef.ref.orderByChild("Game").equalTo(props.gameData.Game).once('value', snapshot => {
+    if(snapshot.exists()){
+      isfav = "Favorited";
+    }
+  });
  
   return (
       <div className="col-12 col-md-6 col-lg-6 col-xl-3 d-flex">
@@ -258,6 +258,9 @@ function FavList(props){
         singleFavCopy.key = key;
         return singleFavCopy;
       });
+    }
+    else{
+      allFavsArray = [];
     }
   });
  

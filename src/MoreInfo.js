@@ -3,6 +3,7 @@ import {useParams, Redirect} from "react-router-dom";
 import games from './data/gameData.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import firebase from 'firebase';
 
 function MoreInfo(props){
     const [backHome, setBackHome] = useState("undefined");
@@ -12,9 +13,9 @@ function MoreInfo(props){
     if(!game) return <h2>Error: Game Not Found</h2>
     let imgLink = "/" + game.Picture;
     const handleButtonClick = (event) => {
-        props.rootRef.ref.orderByChild("Game").equalTo(game.Game).once('value', snapshot => {
+        firebase.database().ref().orderByChild("Game").equalTo(game.Game).once('value', snapshot => {
           if(!snapshot.exists()){
-            props.rootRef.push(game);
+            firebase.database().ref().push(game);
           }
         });
       }

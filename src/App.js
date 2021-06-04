@@ -18,7 +18,6 @@ function App(props) {
 
   const gameData = games;
   const [keyword, setKeyword] = useState("");
-  const rootRef = firebase.database().ref(); //reference to firebase database
 
   return (
       <div className="the-body">
@@ -30,11 +29,11 @@ function App(props) {
         <main>
           <Switch>
             <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} />
-                  <RenderCardList gameData={gameData} searchTerm={keyword} rootRef={rootRef} />
+                  <RenderCardList gameData={gameData} searchTerm={keyword}/>
             </Route>
             <Route path="/about"> <AboutPage /> </Route>
-            <Route path="/favorite"><FavPage rootRef={rootRef}/></Route>
-            <Route path="/info/:gameName"> <MoreInfo rootRef={rootRef}/> </Route>
+            <Route path="/favorite"><FavPage/></Route>
+            <Route path="/info/:gameName"> <MoreInfo/> </Route>
             <Redirect to="/" />
           </Switch>
         </main>

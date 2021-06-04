@@ -53,7 +53,7 @@ function RenderCardList(props) {
       })
       gameList = searchList.map((gameObj) => {
       
-        return <RenderCard key={gameObj.Game} gameData={gameObj} rootRef={props.rootRef} />
+        return <RenderCard key={gameObj.Game} gameData={gameObj} />
       });
     }
     else if(runGame(racing)) {
@@ -68,7 +68,7 @@ function RenderCardList(props) {
       })
       gameList = searchList.map((gameObj) => {
       
-        return <RenderCard key={gameObj.Game} gameData={gameObj} rootRef={props.rootRef}/>
+        return <RenderCard key={gameObj.Game} gameData={gameObj}/>
       });
   
     }
@@ -83,7 +83,7 @@ function RenderCardList(props) {
       })
       gameList = searchList.map((gameObj) => {
       
-        return <RenderCard key={gameObj.Game} gameData={gameObj} rootRef={props.rootRef} />
+        return <RenderCard key={gameObj.Game} gameData={gameObj} />
       });
   
     }

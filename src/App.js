@@ -34,7 +34,7 @@ function App(props) {
             </Route>
             <Route path="/about"> <AboutPage /> </Route>
             <Route path="/favorite"><FavPage rootRef={rootRef}/></Route>
-            <Route path="/info/:gameName"> <MoreInfo rootRef={rootRef} gameData={gameData}/> </Route>
+            <Route path="/info/:gameName"> <MoreInfo rootRef={rootRef}/> </Route>
             <Redirect to="/" />
           </Switch>
         </main>

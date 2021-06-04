@@ -1,10 +1,11 @@
-import React from 'react';
-import {useParams} from "react-router-dom";
+import React, {useState} from 'react';
+import {useParams, Redirect} from "react-router-dom";
 import games from './data/gameData.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function MoreInfo(props){
+    const [backHome, setBackHome] = useState("undefined");
     const urlParams = useParams();
     let gameName = urlParams.gameName;
     let game =  games.find(clickedGame => clickedGame.Game === gameName);
@@ -17,6 +18,12 @@ function MoreInfo(props){
           }
         });
       }
+    const handleHomeClick = (event) => {
+        setBackHome("/");
+    }
+    if(backHome !== "undefined") {
+            return <Redirect push to={setBackHome}/>;
+    }
     return (
         <div>
           <h2>{game.Game}</h2>
@@ -29,6 +36,7 @@ function MoreInfo(props){
               <li><a className="text-white" target="_blank" rel="noopener noreferrer" href={game.Discord}> Discord Link</a></li>
           </ul>
           <button onClick={handleButtonClick} className="fav-button bg-info text-white">Favorite</button>
+          <button onClick={handleHomeClick} className="fav-button bg-info text-white">Go Back</button>
         </div>
       );
 }

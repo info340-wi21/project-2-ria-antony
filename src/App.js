@@ -9,6 +9,7 @@ import Search from './Search';
 import NavBar from './NavBar';
 import RenderCardList from './RenderCardList';
 import FavPage from './FavPage';
+import MoreInfo from './MoreInfo';
 
 import games from './data/gameData.json';
 
@@ -17,7 +18,6 @@ function App(props) {
 
   const gameData = games;
   const [keyword, setKeyword] = useState("");
-  const [cardClicked, setCardClicked] = useState(false);
   const rootRef = firebase.database().ref(); //reference to firebase database
 
   return (
@@ -29,11 +29,12 @@ function App(props) {
         {/* index page searchBox*/}
         <main>
           <Switch>
-            <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} cardClicked={cardClicked} setCardClicked={setCardClicked} />
-                  <RenderCardList gameData={gameData} searchTerm={keyword} cardClicked={cardClicked} setCardClicked={setCardClicked} rootRef={rootRef} />
+            <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} />
+                  <RenderCardList gameData={gameData} searchTerm={keyword} rootRef={rootRef} />
             </Route>
             <Route path="/about"> <AboutPage /> </Route>
             <Route path="/favorite"><FavPage rootRef={rootRef}/></Route>
+            <Route path="/info/:gameName"> <MoreInfo rootRef={rootRef} gameData={gameData}/> </Route>
             <Redirect to="/" />
           </Switch>
         </main>

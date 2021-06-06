@@ -2,46 +2,52 @@
 [
   {
     "Game": "Breath of the Wild",
+    "Simplified_Name": "Breath Wild",
     "Release_Date": "3/3/2017",
     "Picture": "img/BOTW.jpg",
     "Subreddit": "https://www.reddit.com/r/Breath_of_the_Wild/",
     "Discord": "https://discord.com/invite/botw",
-    "Genre": "Zelda"
+    "Genre": "Adventure"
   },
   {
     "Game": "Ocarina of Time",
+    "Simplified_Name": "Ocarina Time",
     "Release_Date": "11/21/1998",
     "Picture": "img/Ocarina.jpg",
     "Subreddit": "https://www.reddit.com/r/ZeldaOoT/",
     "Discord": "https://discord.com/invite/rzelda",
-    "Genre": "Zelda"
+    "Genre": "Adventure"
   },
   {
     "Game": "Majora's Mask",
+    "Simplified_Name": "Majora's Mask",
     "Release_Date": "4/27/2000",
     "Picture": "img/Majora.jpg",
     "Subreddit": "https://www.reddit.com/r/majorasmask/",
     "Discord": "https://discord.com/invite/rzelda",
-    "Genre": "Zelda"
+    "Genre": "Adventure"
   },
   {
     "Game": "Link's Awakening",
+    "Simplified_Name": "Link's Awakening",
     "Release_Date": "9/20/2019",
     "Picture": "img/Awakening.jpg",
     "Subreddit": "https://www.reddit.com/r/LinksAwakening/",
     "Discord": "https://discord.com/invite/rzelda",
-    "Genre": "Zelda"
+    "Genre": "Adventure"
   },
   {
     "Game": "Twilight Princess",
+    "Simplified_Name": "Twilight Princess",
     "Release_Date": "11/19/2006",
     "Picture": "img/twilight.jpg",
     "Subreddit": "https://www.reddit.com/r/twilightprincess/",
     "Discord": "https://discord.com/invite/rzelda",
-    "Genre": "Zelda"
+    "Genre": "Adventure"
   },
   {
     "Game": "Forza Horizon 4",
+    "Simplified_Name":  "Forza Horizon 4",
     "Release_Date": "9/28/2018",
     "Picture": "img/Forza_Horizon_4.jpg",
     "Subreddit": "https://www.reddit.com/r/forza/",
@@ -50,6 +56,7 @@
   },
   {
     "Game": "The Crew 2",
+    "Simplified_Name": "Crew 2",
     "Release_Date": "6/29/2018",
     "Picture": "img/Crew_2.jpg",
     "Subreddit": "https://www.reddit.com/r/The_Crew/",
@@ -58,6 +65,7 @@
   },
   {
     "Game": "Need for Speed Heat",
+    "Simplified_Name": "Need Speed Heat",
     "Release_Date": "11/8/2019",
     "Picture": "img/NFS_Heat.jpg",
     "Subreddit": "https://www.reddit.com/r/NFSHeat/",
@@ -66,6 +74,7 @@
   },
   {
     "Game": "Dirt 5",
+    "Simplified_Name": "Dirt 5",
     "Release_Date": "11/6/2020",
     "Picture": "img/Dirt_5.jpg",
     "Subreddit": "https://www.reddit.com/r/dirtgame/",
@@ -74,6 +83,7 @@
   },
   {
     "Game": "F1 2020",
+    "Simplified_Name": "F1 2020",
     "Release_Date": "7/6/2020",
     "Picture": "img/F1_2020.jpg",
     "Subreddit": "https://www.reddit.com/r/F1Game/",
@@ -82,6 +92,7 @@
   },
   {
     "Game": "Call of Duty: Warzone",
+    "Simplified_Name": "Call Duty: Warzone",
     "Release_Date": "3/10/2020",
     "Picture": "img/Warzone.jpg",
     "Subreddit": "https://www.reddit.com/r/CODWarzone/",
@@ -90,6 +101,7 @@
   },
   {
     "Game": "Battlefield 5",
+    "Simplified_Name": "Battlefield 5",
     "Release_Date": "11/9/2018",
     "Picture": "img/Battlefield_5.jpg",
     "Subreddit": "https://www.reddit.com/r/BattlefieldV/",
@@ -98,6 +110,7 @@
   },
   {
     "Game": "Destiny 2",
+    "Simplified_Name": "Destiny 2",
     "Release_Date": "9/6/2017",
     "Picture": "img/Destiny_2.jpg",
     "Subreddit": "https://www.reddit.com/r/destiny2/",
@@ -106,6 +119,7 @@
   },
   {
     "Game": "Valorant",
+    "Simplified_Name": "Valorant",
     "Release_Date": "6/2/2020",
     "Picture": "img/Valorant.jpg",
     "Subreddit": "https://www.reddit.com/r/VALORANT/",
@@ -114,6 +128,7 @@
   },
   {
     "Game": "Counter-Strike: Global Offensive",
+    "Simplified_Name": "Counter-Strike: Global Offensive",
     "Release_Date": "8/21/2012",
     "Picture": "img/CSGO.jpg",
     "Subreddit": "https://www.reddit.com/r/GlobalOffensive/",

@@ -1,9 +1,13 @@
+/* File contains AboutPage componenet. The component can be called
+   using <AboutPage/>.
+*/
 import React from 'react';
-import { Card } from 'reactstrap';
 import './App.css';
 
 
 function AboutPage() {
+    /* This component renders the about page.
+    */
     return (
         <div>
             <h1 className="display-2" id="aboutHeader">About Us</h1>

@@ -4,7 +4,7 @@
 */
 
 import React, {useState} from 'react';
-import { Route, Switch, Redirect} from 'react-router-dom';
+import {Switch, Redirect} from 'react-router-dom';
 
 function RenderCard(props) {
     /* This component takes an object containing

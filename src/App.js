@@ -7,7 +7,6 @@ import './App.css';
 import { AboutPage } from './About';
 import 'bootstrap/dist/css/bootstrap.min.css'; //bootstrap
 import { Route, Switch, Redirect} from 'react-router-dom';
-import firebase from 'firebase';
 import Search from './Search';
 import NavBar from './NavBar';
 import RenderCardList from './RenderCardList';

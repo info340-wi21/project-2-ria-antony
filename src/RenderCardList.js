@@ -19,21 +19,21 @@ function RenderCardList(props) {
 
     let searchTokens = props.searchTerm.toLowerCase().split(" "); //takes input, removes capitalization and splits into array of strings
     
-    let botwArray = ["breath", "of", "the", "wild"];
-    let ootArray = ["ocarina", "of", "time"];
+    let botwArray = ["breath", "wild"];
+    let ootArray = ["ocarina", "time"];
     let mmArray = ["majora's", "mask"];
     let laArray = ["link's", "awakening"];
     let tpArray = ["twilight", "princess"];//Zelda
     let forArray = ["forza", "horizon", "4"];
-    let crewArray = ["the", "crew", "2"];
-    let nfsArray = ["need", "for", "speed", "heat"];
+    let crewArray = ["crew", "2"];
+    let nfsArray = ["need", "speed", "heat"];
     let dirtArray = ["dirt", "5"];
     let fArray = ["f1", "2020"];//racing
-    let warArray = ["call", "of", "duty:", "warzone"];
+    let warArray = ["call", "duty:", "warzone"];
     let bfArray = ["battlefield", "5"];
     let destArray = ["destiny", "2"];
     let valArray = ["valorant"];
-    let csgoArray = ["counter-", "strike", "global", "offensive"];//shooter
+    let csgoArray = ["counter-", "counter", "strike", "global", "offensive"];//shooter
   
     let zelda = [botwArray, ootArray, mmArray, laArray, tpArray];
     let racing = [forArray, crewArray, nfsArray, dirtArray, fArray];
@@ -59,8 +59,8 @@ function RenderCardList(props) {
   
       //filters out the searched game from the rendered cards
       let searchList = props.gameData.filter(function(item) {
-        if(item.Genre === "Zelda") {
-          if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+        if(item.Genre === "Adventure") {
+          if(!findCommonElements(searchTokens, item.Simplified_Name.toLowerCase().split(" "))) {
             return item;
           }
         }
@@ -75,7 +75,7 @@ function RenderCardList(props) {
       //filters out the searched game from the rendered cards
       let searchList = props.gameData.filter(function(item) {
         if(item.Genre === "Racing") {
-          if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+          if(!findCommonElements(searchTokens, item.Simplified_Name.toLowerCase().split(" "))) {
             return item;
           }
         }
@@ -90,7 +90,7 @@ function RenderCardList(props) {
       //filters out the searched game from the rendered cards
       let searchList = props.gameData.filter(function(item) {
         if(item.Genre === "Shooter") {
-          if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+          if(!findCommonElements(searchTokens, item.Simplified_Name.toLowerCase().split(" "))) {
             return item;
           }
         }

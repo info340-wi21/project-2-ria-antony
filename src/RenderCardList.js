@@ -1,9 +1,23 @@
+/* File contains RenderCardList componenet. The component can be called
+   using <RenderCardList/>. The componenet takes in the props
+   gameData (an array of objects containing information about games) and
+   keyword (a state variable that contains userInput from search bar).
+*/
 import React from 'react';
 import RenderCard from './RenderCard';
 
 function RenderCardList(props) {
+    /* This component takes th user input (which is
+       stored in the keyword prop) from the search
+       bar and finds four different games that
+       are similar to the game the user inputted. These
+       games are taken from the gameData prop. This component
+       returns four calls to RenderCard, each call taking in
+       an object with information about one of the four
+       similar games as a prop called gameData. 
+    */
 
-    let searchTokens = props.searchTerm.toLowerCase().split(" ");
+    let searchTokens = props.searchTerm.toLowerCase().split(" "); //takes input, removes capitalization and splits into array of strings
     
     let botwArray = ["breath", "of", "the", "wild"];
     let ootArray = ["ocarina", "of", "time"];
@@ -53,7 +67,7 @@ function RenderCardList(props) {
       })
       gameList = searchList.map((gameObj) => {
       
-        return <RenderCard key={gameObj.Game} gameData={gameObj} />
+        return <RenderCard gameData={gameObj} />
       });
     }
     else if(runGame(racing)) {
@@ -68,7 +82,7 @@ function RenderCardList(props) {
       })
       gameList = searchList.map((gameObj) => {
       
-        return <RenderCard key={gameObj.Game} gameData={gameObj}/>
+        return <RenderCard gameData={gameObj}/>
       });
   
     }
@@ -83,7 +97,7 @@ function RenderCardList(props) {
       })
       gameList = searchList.map((gameObj) => {
       
-        return <RenderCard key={gameObj.Game} gameData={gameObj} />
+        return <RenderCard  gameData={gameObj} />
       });
   
     }

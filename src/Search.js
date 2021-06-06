@@ -1,8 +1,21 @@
+/* File contains Search componenet. The component can be called
+   using <Search/>. The componenet takes in the props
+   keyword (a state variable that holds user input) and
+   setKeyword (a function that changes state variable).
+*/
+
 import React from 'react';
 import { Jumbotron } from 'reactstrap';
 import './App.css';
 
 function Search(props) {
+/* This component renders instructions
+   for user on how to use the website
+   along with a search bar in which the
+   user can input their favorite game
+   and receive search results as they
+   type.
+*/
   return (
 
     <div className="search-view">
@@ -14,7 +27,8 @@ function Search(props) {
 
       
       <div className="searchBox" role="search">
-        <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder="Search..." />
+        {/* creates a search bar that reacts to any change in user input */}
+        <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder="Search..." /> 
       </div>
       </Jumbotron>
     </div>

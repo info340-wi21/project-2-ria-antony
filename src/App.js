@@ -1,3 +1,6 @@
+/* File contains App componenet. The component can be called
+   using <App/>.
+*/
 
 import React, {useState} from 'react'; //react library 
 import './App.css';
@@ -15,17 +18,22 @@ import games from './data/gameData.json';
 
 
 function App(props) {
+  /* This component creates the
+     "skeleton" of the website. This
+     component also intializes the
+     keyword state which is used in Search
+     and RenderCardList components.
+  */
 
   const gameData = games;
   const [keyword, setKeyword] = useState("");
 
   return (
       <div className="the-body">
-        {/*header for index page */}
+        {/*header with nav bar*/}
         <header>
-          <NavBar />
+          <NavBar/>
         </header>
-        {/* index page searchBox*/}
         <main>
           <Switch>
             <Route exact path="/"> <Search keyword={keyword} setKeyword={setKeyword} />
@@ -37,7 +45,7 @@ function App(props) {
             <Redirect to="/" />
           </Switch>
         </main>
-        {/* index page footer*/}
+        {/*footer*/}
         <footer className="footer">
           <p>2021 &#169;</p>
         </footer>

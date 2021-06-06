@@ -1,8 +1,14 @@
+/* File contains FavPage and FavList componenets. The component can be called
+   using <FavPage/> and <FavList/>. File only exports FavPage.
+*/
+
 import React, { useState, useEffect } from 'react'; 
 import firebase from 'firebase';
 
-
 function FavPage(props) {
+/* This component renders the Favorites
+   page.
+*/
     return (
         <div>
             <h1 className="display-2" id="aboutHeader">Favorites</h1>
@@ -12,11 +18,14 @@ function FavPage(props) {
   }
 
   function FavList(){
+  /* This comononet renders
+     cards depicting games the user has favorited. The component
+     also renders a "remove button" which allows users to
+     unfavorite games.
+*/
     // creating a state variable with the list of favorited game objects 
     const [favoriteArray, setFavoriteArray] = useState([]);
     
-    // When this function is first ran, it will fetchData.
-    // we need to fetch data in a function otherwise it'll re-render to infinity 
     useEffect(() => {
       fetchData()
     }, [])
@@ -24,7 +33,7 @@ function FavPage(props) {
     const fetchData = () => {  
       let allFavsArray = []; //empty array that will hold the array version of firebase data
       console.log("reloading the data")
-      firebase.database().ref().on('value', snapshot => { //Kinda complicated but bascially turns firebase data into array form so it can be mapped
+      firebase.database().ref().on('value', snapshot => { //Turns firebase data into array form so it can be mapped
         let favShot = snapshot.val();
         if (favShot !== null){
           const allFavsObject = favShot;
@@ -58,7 +67,7 @@ function FavPage(props) {
         firebase.database().ref().child(key).remove(); //Removes gameObject from Firebase data based on key
       }
       
-      // update the data
+      // update the data so that card depicted the game that was just unfavorited will no longer be displayed on webpage
       fetchData();
       event.preventDefault()
     }

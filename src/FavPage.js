@@ -5,7 +5,7 @@ import firebase from 'firebase';
 function FavPage(props) {
     return (
         <div>
-            <h1 id="aboutHeader">Favorites</h1>
+            <h1 className="display-2" id="aboutHeader">Favorites</h1>
                 <FavList ></FavList>
         </div>
     );

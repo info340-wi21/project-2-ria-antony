@@ -4,6 +4,18 @@
     font-family: monospace;
     
 }
+/*shadow code from: https://www.w3schools.com/howto/howto_css_glowing_text.asp */
+#homePage{
+    color: #303636;
+    font-size: 100px;
+    font-family: monospace;
+    text-shadow:  0 0 20px #fff, 0 0 30px #ebafcd, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;;
+}
+#paragraph{
+    color: #d623b8;
+    font-size: 20px;
+    font-family: monospace;
+}
 
 .card{
     box-shadow: 4px 4px black;

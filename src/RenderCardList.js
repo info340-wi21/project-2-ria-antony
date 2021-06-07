@@ -22,7 +22,7 @@ function RenderCardList(props) {
     let adventure = [["breath", "wild"], ["ocarina", "time"], ["majora's", "mask"], ["link's", "awakening"], ["twilight", "princess"]];
     let racing = [["forza", "horizon", "4"], ["crew", "2"], ["need", "speed", "heat"], ["dirt", "5"], ["f1", "2020"], ["Asphalt", "Legends"], ["Burnout", "Paradise"]];
     let shooter = [["call", "duty:", "warzone"], ["battlefield", "5"], ["destiny", "2"], ["valorant"], ["counter-", "counter", "strike", "global", "offensive"], ["Over", "Watch"]];
-    let simulator = [["Sims"], ["Farming", "Simulator"], ["Cities", "Skylines"], ["Football", "Manager"], ["Euro", "Truck", "Simulator"], ["Kerbal", "Space", "Program"], ["Planet", "Coaster"], ["Microsoft", "Flight", "Simulator"], ["Prison", "Architect"]];
+    let simulator = [["sims"], ["farming", "simulator"], ["cities", "skylines"], ["football", "manager"], ["euro", "truck", "simulator"], ["kerbal", "space", "program"], ["planet", "coaster"], ["microsoft", "flight", "simulator"], ["prison", "architect"]];
 
     //finds common elements between two arrays
     function findCommonElements(array1, array2) {
@@ -52,21 +52,20 @@ function RenderCardList(props) {
         }
       })
       gameList = searchList.map((gameObj) => {
-        return <RenderCard gameData={gameObj} />
+        return <RenderCard key={gameObj.Game} gameData={gameObj} />
       });
     }
     else if(runGame(racing)) {
       //filters out the searched game from the rendered cards
       let searchList = props.gameData.filter(function(item) {
         if(item.Genre === "Racing") {
-          console.log(item.Genre)
           if(!findCommonElements(searchTokens, item.Simplified_Name.toLowerCase().split(" "))) {
             return item;
           }
         }
       })
       gameList = searchList.map((gameObj) => {
-        return <RenderCard gameData={gameObj}/>
+        return <RenderCard key={gameObj.Game} gameData={gameObj}/>
       });
     }
     else if(runGame(shooter)) {
@@ -85,16 +84,14 @@ function RenderCardList(props) {
     else if(runGame(simulator)) {
       //filters out the searched game from the rendered cards
       let searchList = props.gameData.filter(function(item) {
-        console.log(item.Genre);
         if(item.Genre === "Simulator") {
-          console.log(item.Genre);
-          if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+          if(!findCommonElements(searchTokens, item.Simplified_Name.toLowerCase().split(" "))) {
             return item;
           }
         }
       })
       gameList = searchList.map((gameObj) => {
-        return <RenderCard  gameData={gameObj} />
+        return <RenderCard key={gameObj.Game} gameData={gameObj} />
       });
     }
     return (

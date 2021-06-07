@@ -18,45 +18,31 @@ function RenderCardList(props) {
     */
 
     let searchTokens = props.searchTerm.toLowerCase().split(" "); //takes input, removes capitalization and splits into array of strings
-    
-    let botwArray = ["breath", "wild"];
-    let ootArray = ["ocarina", "time"];
-    let mmArray = ["majora's", "mask"];
-    let laArray = ["link's", "awakening"];
-    let tpArray = ["twilight", "princess"];//Zelda
-    let forArray = ["forza", "horizon", "4"];
-    let crewArray = ["crew", "2"];
-    let nfsArray = ["need", "speed", "heat"];
-    let dirtArray = ["dirt", "5"];
-    let fArray = ["f1", "2020"];//racing
-    let warArray = ["call", "duty:", "warzone"];
-    let bfArray = ["battlefield", "5"];
-    let destArray = ["destiny", "2"];
-    let valArray = ["valorant"];
-    let csgoArray = ["counter-", "counter", "strike", "global", "offensive"];//shooter
   
-    let zelda = [botwArray, ootArray, mmArray, laArray, tpArray];
-    let racing = [forArray, crewArray, nfsArray, dirtArray, fArray];
-    let shooter = [warArray, bfArray, destArray, valArray, csgoArray];
-  
+    let adventure = [["breath", "wild"], ["ocarina", "time"], ["majora's", "mask"], ["link's", "awakening"], ["twilight", "princess"]];
+    let racing = [["forza", "horizon", "4"], ["crew", "2"], ["need", "speed", "heat"], ["dirt", "5"], ["f1", "2020"], ["Asphalt", "Legends"], ["Burnout", "Paradise"]];
+    let shooter = [["call", "duty:", "warzone"], ["battlefield", "5"], ["destiny", "2"], ["valorant"], ["counter-", "counter", "strike", "global", "offensive"], ["Over", "Watch"]];
+    let simulator = [["Sims"], ["Farming", "Simulator"], ["Cities", "Skylines"], ["Football", "Manager"], ["Euro", "Truck", "Simulator"], ["Kerbal", "Space", "Program"], ["Planet", "Coaster"], ["Microsoft", "Flight", "Simulator"], ["Prison", "Architect"]];
+
     //finds common elements between two arrays
     function findCommonElements(array1, array2) {
       return array1.some(item => array2.includes(item))
     }
   
-      //determines if searchTerm is found in an array
-      function runGame(array1) {
-        for(let game of array1) {
-          if(findCommonElements(searchTokens, game)) {
-            return true;
-          }
+    //determines if searchTerm is found in an array
+    function runGame(array1) {
+      for(let game of array1) {
+        if(findCommonElements(searchTokens, game)) {
+          return true;
         }
       }
+      return false;
+    }
   
     let gameList= [];
+
     //runs through the 3 genres and renders the cards
-    if(runGame(zelda)) {
-  
+    if(runGame(adventure)) {
       //filters out the searched game from the rendered cards
       let searchList = props.gameData.filter(function(item) {
         if(item.Genre === "Adventure") {
@@ -66,25 +52,22 @@ function RenderCardList(props) {
         }
       })
       gameList = searchList.map((gameObj) => {
-      
         return <RenderCard gameData={gameObj} />
       });
     }
     else if(runGame(racing)) {
-  
       //filters out the searched game from the rendered cards
       let searchList = props.gameData.filter(function(item) {
         if(item.Genre === "Racing") {
+          console.log(item.Genre)
           if(!findCommonElements(searchTokens, item.Simplified_Name.toLowerCase().split(" "))) {
             return item;
           }
         }
       })
       gameList = searchList.map((gameObj) => {
-      
         return <RenderCard gameData={gameObj}/>
       });
-  
     }
     else if(runGame(shooter)) {
       //filters out the searched game from the rendered cards
@@ -96,16 +79,24 @@ function RenderCardList(props) {
         }
       })
       gameList = searchList.map((gameObj) => {
-      
         return <RenderCard  gameData={gameObj} />
       });
-  
     }
-    else {
-      //renderError
+    else if(runGame(simulator)) {
+      //filters out the searched game from the rendered cards
+      let searchList = props.gameData.filter(function(item) {
+        console.log(item.Genre);
+        if(item.Genre === "Simulator") {
+          console.log(item.Genre);
+          if(!findCommonElements(searchTokens, item.Game.toLowerCase().split(" "))) {
+            return item;
+          }
+        }
+      })
+      gameList = searchList.map((gameObj) => {
+        return <RenderCard  gameData={gameObj} />
+      });
     }
-  
-   
     return (
       <div className="container">
         <div className="row">
@@ -113,8 +104,7 @@ function RenderCardList(props) {
         </div>
       </div>
     );
-  }
-
+    }
 export default RenderCardList;
 
 export {RenderCardList};

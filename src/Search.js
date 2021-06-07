@@ -16,6 +16,7 @@ function Search(props) {
    and receive search results as they
    type.
 */
+let placeholder = "Try searching for games like Battlefield, Forza, Farming Simulator or Twilight Princess";
   return (
 
     <div className="search-view">
@@ -28,7 +29,7 @@ function Search(props) {
       
       <div className="searchBox" role="search">
         {/* creates a search bar that reacts to any change in user input */}
-        <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder="Search..." /> 
+        <input value={props.keyword} onInput={e => props.setKeyword(e.target.value)} type="text" id="searchQuery" placeholder={placeholder} /> 
       </div>
       </Jumbotron>
     </div>

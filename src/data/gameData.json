@@ -91,6 +91,24 @@
     "Genre": "Racing"
   },
   {
+    "Game": "Asphalt 9: Legends",
+    "Simplified_Name": "Asphalt 9: Legends",
+    "Release_Date": "6/26/2018",
+    "Picture": "img/Asphalt.jpg",
+    "Subreddit": "https://www.reddit.com/r/Asphalt9/",
+    "Discord": "https://discord.com/invite/asphalt9",
+    "Genre": "Racing"
+  },
+  {
+    "Game": "Burnout Paradise",
+    "Simplified_Name": "Burnout Paradise",
+    "Release_Date": "1/22/2008",
+    "Picture": "img/Burnout.jpg",
+    "Subreddit": "https://www.reddit.com/r/Burnout/",
+    "Discord": "https://www.reddit.com/r/Burnout/comments/ay565f/burnout_discord_servers/",
+    "Genre": "Racing"
+  },
+  {
     "Game": "Call of Duty: Warzone",
     "Simplified_Name": "Call Duty: Warzone",
     "Release_Date": "3/10/2020",
@@ -134,5 +152,104 @@
     "Subreddit": "https://www.reddit.com/r/GlobalOffensive/",
     "Discord": "https://discord.com/invite/counterstrike",
     "Genre": "Shooter"
+  },
+  {
+    "Game": "Overwatch",
+    "Simplified_Name": "Overwatch",
+    "Release_Date": "5/24/2016",
+    "Picture": "img/Overwatch.jpg",
+    "Subreddit": "https://www.reddit.com/r/Overwatch/",
+    "Discord": "https://discord.com/invite/overwatch",
+    "Genre": "Shooter"
+  },
+  {
+    "Game": "Apex Legends",
+    "Simplified_Name": "Apex Legends",
+    "Release_Date": "2/4/2019",
+    "Picture": "img/Apex.jpg",
+    "Subreddit": "https://www.reddit.com/r/apexlegends/",
+    "Discord": "https://discord.com/invite/apexlegends",
+    "Genre": "Shooter"
+  },
+  {
+    "Game": "The Sims 4",
+    "Simplified_Name": "The Sims 5",
+    "Release_Date": "9/2/2014",
+    "Picture": "img/Sims.jpg",
+    "Subreddit": "https://www.reddit.com/r/Sims4/",
+    "Discord": "https://sims.fandom.com/wiki/The_Sims_Wiki:Discord",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Farming Simulator 17",
+    "Simplified_Name": "Farming Simulator 17",
+    "Release_Date": "10/25/2016",
+    "Picture": "img/Farming.jpg",
+    "Subreddit": "https://www.reddit.com/r/farmingsimulator/",
+    "Discord": "https://discord.com/invite/giantssoftware",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Cities: Skylines",
+    "Simplified_Name": "Cities: Skylines",
+    "Release_Date": "3/10/2015",
+    "Picture": "img/Cities.jpg",
+    "Subreddit": "https://www.reddit.com/r/CitiesSkylines/",
+    "Discord": "https://discord.com/invite/r-citiesskylines",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Football Manager 2020",
+    "Simplified_Name": "Football Manager 2021",
+    "Release_Date": "10/31/2019",
+    "Picture": "img/Manager.jpg",
+    "Subreddit": "https://www.reddit.com/r/footballmanagergames/",
+    "Discord": "https://www.reddit.com/r/footballmanagergames/comments/96hxwo/the_best_and_biggest_fm_discord_server_4k_members/",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Euro Truck Simulator 2",
+    "Simplified_Name": "Euro Truck Simulator 3",
+    "Release_Date": "10/19/2019",
+    "Picture": "img/Euro.jpg",
+    "Subreddit": "https://www.reddit.com/r/EuroTruck2/",
+    "Discord": "https://discord.com/invite/truckersmp",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Kerbal space program",
+    "Simplified_Name": "Kerbal space program",
+    "Release_Date": "6/24/2011",
+    "Picture": "img/Kerbal.jpg",
+    "Subreddit": "https://www.reddit.com/r/KerbalSpaceProgram/",
+    "Discord": "https://discord.com/invite/kerbal",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Planet Coaster",
+    "Simplified_Name": "Planet Coaster",
+    "Release_Date": "11/17/2016",
+    "Picture": "img/Coaster.jpg",
+    "Subreddit": "https://www.reddit.com/r/PlanetCoaster/",
+    "Discord": "https://discord.com/invite/planetcoaster",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Microsoft Flight Simulator",
+    "Simplified_Name": "Microsoft Flight Simulator",
+    "Release_Date": "10/13/2006",
+    "Picture": "img/Flight.jpg",
+    "Subreddit": "https://www.reddit.com/r/MicrosoftFlightSim/",
+    "Discord": "https://discord.com/invite/msfs",
+    "Genre": "Simulator"
+  },
+  {
+    "Game": "Prison Architect",
+    "Simplified_Name": "Prison Architect",
+    "Release_Date": "10/6/2015",
+    "Picture": "img/Prison.jpg",
+    "Subreddit": "https://www.reddit.com/r/prisonarchitect/",
+    "Discord": "https://discord.com/invite/prisonarchitect",
+    "Genre": "Simulator"
   }
  ]

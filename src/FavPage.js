@@ -90,7 +90,7 @@ function FavPage(props) {
                               <p>Genre: {gameObj.Genre}</p>
                               <a className="text-white" target="_blank" rel="noopener noreferrer" href={gameObj.Subreddit}>Reddit</a><br></br><br></br>
                               <a className="text-white" target="_blank" rel="noopener noreferrer" href={gameObj.Discord}>Discord</a><br></br><br></br>
-                              <button onClick={(event) => handleClick(event, gameObj)} className="re-button bg-danger text-white">remove</button>
+                              <button onClick={(event) => handleClick(event, gameObj)} className="re-button bg-danger text-white">Remove</button>
                             </div>
                           </div>
                         </div>

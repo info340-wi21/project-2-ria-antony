@@ -16,6 +16,13 @@
     font-size: 20px;
     font-family: monospace;
 }
+#aboutHeader{
+    color: #d623b8;
+    text-shadow:0 0 20px #16ccba;
+}
+#aboutContent{
+    color: #c5cecd;
+}
 
 .card{
     box-shadow: 4px 4px black;
@@ -130,6 +137,10 @@ img{
 }
 .footer{
     flex-shrink: 0;
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
 }
 
 #aboutContent {
@@ -151,6 +162,16 @@ img{
     display: flex;
     justify-content: center;
     text-align: center;
+}
+#moreInfo{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    text-shadow:0 0 20px  #d623b8;;
+}
+#moreInfoList{
+    list-style-type: none;
+
 }
 
 @media (min-width: 768px){
